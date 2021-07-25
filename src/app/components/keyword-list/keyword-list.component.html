@@ -1,0 +1,29 @@
+<h1>Keywords</h1>
+<a routerLink="create" class="btn btn-sm btn-success mb-2">Add</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 30%">Name</th>
+            <th style="width: 30%">Description</th>            
+            <th style="width: 10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let keyword of keywords">
+            <td>{{ keyword.name}} </td>
+            <td>{{keyword.description}}</td>         
+            <td style="white-space: nowrap">
+                <a routerLink="edit/{{keyword.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                <button (click)="deleteKeyword(keyword.id)" class="btn btn-sm btn-danger btn-delete-keyword" [disabled]="keyword.isDeleting">
+                    <span *ngIf="keyword.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!keyword.isDeleting">Delete</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!keywords">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>

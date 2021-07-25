@@ -1,0 +1,68 @@
+<h1 *ngIf="isAddMode">Add Keyword</h1>
+<h1 *ngIf="!isAddMode">Edit Keyword</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+        <div class="form-group col-7">
+            <label>Name</label>
+            <input type="text" formControlName="name" class="form-control" 
+            [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Name is required</div>              
+            </div>
+        </div>   
+    </div>
+    <div class="form-row">
+        <div class="form-group col-7">
+            <label>Description</label>
+            <input type="text" formControlName="description" class="form-control" 
+            [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                <div *ngIf="f.description.errors.required">Description is required</div>              
+            </div>
+        </div>   
+    </div>
+
+    <div class="form-row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 5%">Selected</th>
+                    <th style="width: 30%">Name</th>
+                    <th style="width: 30%">URL</th>            
+                    <th style="width: 10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let document of documents">
+                <td>
+                    <a class="navbar-item"> 
+                        <img src="assets/check.svg"  *ngIf="document.isSelected">
+                    </a>
+                    </td>
+                    <td>{{ document.name}} </td>
+                    <td>{{document.url}}</td>         
+                    <td style="white-space: nowrap"> 
+                        <button class="btn btn-success  btn-sm btn-select-document" 
+                        *ngIf="!document.isSelected" (click)="selectDocument(document); $event.preventDefault()">{{document.isSelected ? 'Unmap' : 'Map' }}                        
+                       </button>
+                        <button class="btn btn-sm btn-danger btn-delete-document" *ngIf="document.isSelected" 
+                        (click)="unselectDocument(document);$event.preventDefault()">Unmap</button>
+                    </td>
+                </tr>
+                <tr *ngIf="!documents">
+                    <td colspan="4" class="text-center">
+                        <span class="spinner-border spinner-border-lg align-center"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Save
+        </button>
+        <a routerLink="/keywords" class="btn btn-link">Cancel</a>
+    </div>
+</form>
