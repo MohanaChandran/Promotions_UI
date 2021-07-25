@@ -1,5 +1,13 @@
 <h1>Keywords</h1>
+
+
+<input type="text" class="input-lg"  style="width:75%;" 
+placeholder="Enter Keyword name" [(ngModel)]="searchText" />
+
+<button  (click)="searchKeyword();" class="btn btn-sm btn-primary" style="margin-left:1%;">Search</button>
+<br><br>
 <a routerLink="create" class="btn btn-sm btn-success mb-2">Add</a>
+
 <table class="table table-striped">
     <thead>
         <tr>

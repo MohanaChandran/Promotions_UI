@@ -9,7 +9,6 @@ import { fakeBackendProvider } from './helpers';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { KeywordCreateComponent } from './components/keyword-create/keyword-create.component';
 import { KeywordDetailsComponent } from './components/keyword-details/keyword-details.component';
 import { KeywordListComponent } from './components/keyword-list/keyword-list.component';
 
@@ -20,7 +19,6 @@ import { AlertComponent } from './components/alert/alert.component';
 @NgModule({
   declarations: [
     AppComponent,   
-    KeywordCreateComponent,
     KeywordDetailsComponent,
     KeywordListComponent,
     AlertComponent    

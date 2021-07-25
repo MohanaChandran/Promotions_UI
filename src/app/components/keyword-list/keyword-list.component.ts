@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-
-
 import { KeywordsService } from '@app/services';
 import { Keyword } from '@app/data-models';
 
@@ -13,8 +11,8 @@ import { Keyword } from '@app/data-models';
 
 
 export class KeywordListComponent implements OnInit {
-
-  keywords!: Keyword[];
+    keywords!: Keyword[];  
+    searchText:string="";
 
   constructor(private keywordService: KeywordsService) { }
 
@@ -33,4 +31,9 @@ export class KeywordListComponent implements OnInit {
         .subscribe(() => this.keywords = this.keywords.filter(x => x.id !== id));
 }
 
+searchKeyword() {
+  this.keywordService.searchByName(this.searchText)
+    .pipe(first())
+    .subscribe(keywords => this.keywords = keywords);
+}
 }
